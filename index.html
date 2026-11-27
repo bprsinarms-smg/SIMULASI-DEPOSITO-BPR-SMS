@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102b4e">
+  <meta name="description" content="Simulasi dan informasi pembukaan deposito BPR Sinar Mitra Sejahtera.">
+  <title>Deposito | BPR SMS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img id="brandLogo" src="assets/logo-bpr.png" alt="Logo BPR SMS"
+           onerror="this.style.display='none';document.getElementById('logoFallback').style.display='grid'">
+      <div id="logoFallback" class="logo-fallback" aria-label="Logo BPR SMS">BPR<br><b>SMS</b></div>
+      <div class="brand-copy"><strong>BPR SINAR MITRA SEJAHTERA</strong><span>LAYANAN DEPOSITO</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="homeScreen" class="screen home-screen">
+      <div class="hero">
+        <div class="eyebrow"><span class="dot"></span> LAYANAN DIGITAL BPR SMS</div>
+        <h1>Wujudkan rencana keuangan dengan <em>Deposito.</em></h1>
+        <p>Simulasikan potensi manfaat deposito dengan mudah, cepat, dan praktis.</p>
+      </div>
+      <button id="openDeposit" class="product-card" type="button">
+        <span class="product-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5v11H3z"/><path d="M7 12h10M7 15h6M8 8.5V6.2m8 2.3V6.2"/></svg>
+        </span>
+        <span class="product-copy"><strong>DEPOSITO</strong><small>BERINVESTASI MUDAH DAN MENGUNTUNGKAN DENGAN PROSES CEPAT DAN PRAKTIS</small></span>
+        <span class="arrow">→</span>
+      </button>
+      <p class="home-note">Simulasi ini merupakan estimasi dan bukan bukti pembukaan deposito.</p>
+    </section>
+
+    <section id="simScreen" class="screen hidden">
+      <button class="back-link" id="backHome" type="button">← Kembali</button>
+      <div class="page-heading"><span class="eyebrow">HITUNG RENCANA INVESTASI</span><h2>Simulasi Deposito</h2><p>Isi data berikut untuk melihat estimasi manfaat deposito Anda.</p></div>
+
+      <form id="depositForm" novalidate>
+        <label class="field"><span>Nama lengkap</span><input id="customerName" type="text" maxlength="80" placeholder="Masukkan nama lengkap" autocomplete="name" required></label>
+        <label class="field"><span>Nominal deposito</span><div class="input-prefix"><b>Rp</b><input id="principal" type="text" inputmode="numeric" placeholder="Contoh: 10.000.000" required></div></label>
+        <fieldset class="field">
+          <legend>Jangka waktu</legend>
+          <div class="tenor-options">
+            <label><input type="radio" name="tenor" value="1" checked><span>1 Bulan</span></label>
+            <label><input type="radio" name="tenor" value="3"><span>3 Bulan</span></label>
+            <label><input type="radio" name="tenor" value="6"><span>6 Bulan</span></label>
+            <label><input type="radio" name="tenor" value="12"><span>12 Bulan</span></label>
+          </div>
+          <small class="hint tenor-hint">1 Bulan = 30 Hari</small>
+        </fieldset>
+        <label class="field"><span>Bunga per tahun</span><div class="input-suffix"><input id="rate" type="number" min="0" max="100" step="0.01" placeholder="Contoh: 6" required><b>%</b></div><small class="hint">Masukkan suku bunga tahunan sesuai ketentuan BPR SMS.</small></label>
+
+        <div class="mini-results">
+          <div>
+            <span>Cashback (1%)</span>
+            <strong id="cashbackPreview">Rp0</strong>
+            <small class="hint cashback-hint">Cashback diberikan nominal 100juta keatas</small>
+          </div>
+          <div><span>Estimasi bunga bersih</span><strong id="interestPreview">Rp0</strong></div>
+        </div>
+        <div class="total-card"><span>ESTIMASI TOTAL DITERIMA</span><strong id="totalPreview">Rp0</strong><small>Pokok + bunga bersih setelah pajak + cashback</small></div>
+        <p id="formError" class="error" role="alert"></p>
+        <button class="primary-btn" type="submit">PROSES <span>→</span></button>
+        <button class="text-btn" id="resetForm" type="button">Reset simulasi</button>
+      </form>
+      <p class="disclaimer">Perhitungan menggunakan asumsi 30 hari per bulan dan 365 hari per tahun. Hasil akhir mengikuti ketentuan produk, pajak, dan perjanjian deposito yang berlaku.</p>
+    </section>
+  </main>
+
+  <div id="sheetBackdrop" class="backdrop hidden"></div>
+  <section id="confirmSheet" class="bottom-sheet hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head"><div><span class="eyebrow">PERIKSA KEMBALI DATA</span><h2 id="confirmTitle">Konfirmasi Deposito</h2></div><button id="closeSheet" class="close-btn" type="button" aria-label="Tutup">×</button></div>
+    <div class="summary-list">
+      <div><span>Nama</span><strong id="confirmName">-</strong></div>
+      <div><span>Nominal deposito</span><strong id="confirmPrincipal">Rp0</strong></div>
+      <div><span>Jangka waktu</span><strong id="confirmTenor">1 Bulan</strong></div>
+      <div><span>Bunga per tahun</span><strong id="confirmRate">0%</strong></div>
+      <div><span>Pajak bunga (20%)</span><strong id="confirmTax">Rp0</strong></div>
+      <div><span>Cashback (1%)</span><strong id="confirmCashback">Rp0</strong></div>
+      <div><span>Bunga bersih</span><strong id="confirmInterest">Rp0</strong></div>
+    </div>
+    <div class="sheet-total"><span>ESTIMASI JUMLAH DITERIMA</span><strong id="confirmTotal">Rp0</strong></div>
+    <p class="sheet-disclaimer">Dengan melanjutkan, Anda akan diarahkan ke formulir pembukaan deposito resmi. Simulasi ini belum merupakan pembukaan rekening atau penempatan dana.</p>
+    <button id="confirmButton" class="primary-btn" type="button">KONFIRMASI <span>→</span></button>
+  </section>
+
+  <div id="notice" class="toast" role="status" aria-live="polite"></div>
+  <footer>© <span id="year"></span> BPR Sinar Mitra Sejahtera</footer>
+  <script src="script.js"></script>
+</body>
+</html>
