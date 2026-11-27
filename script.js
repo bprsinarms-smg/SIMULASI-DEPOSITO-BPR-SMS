@@ -1,5 +1,5 @@
 /* Konfigurasi: ganti URL di bawah setelah link formulir resmi tersedia. */
-const DEPOSITO_FORM_URL = "";
+const DEPOSITO_FORM_URL = "https://forms.gle/Yt8jibDknMoKqgTx7";
 
 const $ = (id) => document.getElementById(id);
 const homeScreen = $("homeScreen");
