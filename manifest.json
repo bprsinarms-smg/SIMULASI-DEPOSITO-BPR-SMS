@@ -1,0 +1,16 @@
+{
+  "name": "Deposito BPR SMS",
+  "short_name": "Deposito SMS",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#102b4e",
+  "theme_color": "#102b4e",
+  "icons": [
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
